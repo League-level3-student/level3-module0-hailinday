@@ -10,7 +10,7 @@ public class _02_RobotRace {
     // 1. make a main method
 
         // 2. create an array of 5 robots.
-
+		
         // 3. use a for loop to initialize the robots.
 
         // 4. make each robot start at the bottom of the screen, side by side, facing up
