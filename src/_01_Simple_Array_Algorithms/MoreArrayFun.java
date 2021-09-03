@@ -1,5 +1,7 @@
 package _01_Simple_Array_Algorithms;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MoreArrayFun {
@@ -28,10 +30,18 @@ public static void main(String[] args) {
 		}
     }
     System.out.println("\n");
-    for(int i = 0; i < names.length; i++){
-    	Random rand = new Random();
-    	System.out.println(names[rand.nextInt(4)]);
-    }
+    	ArrayList<String> name = new ArrayList<String>();
+    	name.add("Jan");
+    	name.add("Sara");
+    	name.add("Fred");
+    	name.add("Marc");
+    	name.add("Randy");
+        for (int j = name.size()-1; j >= 0 ; j--) {
+        	Random rand = new Random();
+        	int random = rand.nextInt(name.size());
+			System.out.println(name.get(random));
+			name.remove(random);
+		}
     //3. Write a method that takes an array of Strings and prints all the Strings in the array
     //   in reverse order.
 
