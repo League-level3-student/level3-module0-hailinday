@@ -1,5 +1,9 @@
 package _03_Intro_to_2D_Arrays;
 
+import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+
 /*
  *  A 2D array is comparable to a matrix/grid ordered by rows and columns.
  *  A 2D array that holds 3, 1D arrays with each 1D array having 3 elements
@@ -31,8 +35,8 @@ public class _02_2DArrayPractice {
      *          6, 7, 8
      */
     public Integer[][] test1() {
-        
-        return null;
+    	Integer[][] array = {{0,1,2}, {3, 4, 5}, {6, 7, 8}};
+        return array;
     }
     
     /*
@@ -41,8 +45,8 @@ public class _02_2DArrayPractice {
      *          "e", "f", "g", "e"
      */
     public String[][] test2() {
-        
-        return null;
+    	String[][] array = {{"a","b","c","d"}, {"e", "f", "g", "e"}};
+        return array;
     }
     
     /*
@@ -54,8 +58,8 @@ public class _02_2DArrayPractice {
      *          true, false
      */
     public Boolean[][] test3() {
-        
-        return null;
+    	Boolean[][] array = {{true, false}, {false, false}, {false, true}, {true, true}, {true, false}};
+        return array;
     }
     
     /*
@@ -87,7 +91,7 @@ public class _02_2DArrayPractice {
     public Object test4() {
         Object[][] objects = { {null, null, null, null}, {null, null, null, new Object()} };
         
-        return null;
+        return objects[1][3];
     }
     
     /* Given the array of Objects below, return the element that is not null
@@ -97,7 +101,7 @@ public class _02_2DArrayPractice {
     public Object test5() {
         Object[][] objects = { {null, null, new Object(), null}, {null, null, null, null} };
         
-        return null;
+        return objects[0][2];
     }
     
     /*
@@ -105,9 +109,12 @@ public class _02_2DArrayPractice {
      * first row (row 0)
      */
     public Integer test6() {
-        int[][] nums = { {8, 7, 6, 5}, {4, 3}, {2, 1, 0} };
-        
-        return null;
+        int sum = 0;
+    	int[][] nums = { {8, 7, 6, 5}, {4, 3}, {2, 1, 0} };
+        for (int i = 0; i < nums[0].length; i++) {
+			sum += nums[0][i];
+		}
+        return sum;
     }
     
     /*
@@ -115,9 +122,12 @@ public class _02_2DArrayPractice {
      * first column (column 0)
      */
     public Integer test7() {
-        int[][] nums = { {8, 7, 6, 5}, {4, 3}, {2, 1, 0} };
-        
-        return null;
+    	int sum = 0;
+    	int[][] nums = { {8, 7, 6, 5}, {4, 3}, {2, 1, 0} };
+        for (int i = 0; i < nums.length; i++) {
+			sum += nums[i][0];
+		}
+        return sum;
     }
     
     /*
@@ -125,8 +135,11 @@ public class _02_2DArrayPractice {
      * specified row
      */
     public Integer getSumByRow(int[][] matrix, int row) {
-        
-        return null;
+        int total = 0;
+    	for (int i = 0; i < matrix[row].length; i++) {
+			total += matrix[row][i];
+		}
+        return total;
     }
     
     /*
@@ -134,10 +147,13 @@ public class _02_2DArrayPractice {
      * specified column
      */
     public Integer getSumByColumn(int[][] matrix, int col) {
-        
-        return null;
-    }
-    
+    	 int total = 0;
+     	for (int i = 0; i < matrix.length; i++) {
+ 			total += matrix[i][col];
+ 		}
+         return total;
+     }
+
     /*
      * Return the value of the element adjacent to the specified row and column
      * The directions East, West, North, South are relative to the 2D array
@@ -158,22 +174,35 @@ public class _02_2DArrayPractice {
      *    boundaries, return null.
      */
     public Integer getEastNeighbor(int[][] matrix, int row, int col) {
-        
-        return null;
+    	if (col+1<matrix[row].length) {
+    		int east = matrix[row][col+1];
+    		return east;
+		} else {
+			return null;
+		}
     }
     
     public Integer getWestNeighbor(int[][] matrix, int row, int col) {
-        
+    	if (col-1>=0) {
+    		int west = matrix[row][col-1];
+    		return west;
+		}
         return null;
     }
     
     public Integer getNorthNeighbor(int[][] matrix, int row, int col) {
-        
+    	if (row-1>=0) {
+    		int north = matrix[row-1][col];
+    		return north;
+		}
         return null;
     }
     
     public Integer getSouthNeighbor(int[][] matrix, int row, int col) {
-        
+    	if (row+1<matrix.length) {
+    		int south = matrix[row+1][col];
+    		return south;
+		}
         return null;
     }
 }
