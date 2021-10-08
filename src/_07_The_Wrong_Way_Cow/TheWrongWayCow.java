@@ -65,47 +65,54 @@ public class TheWrongWayCow {
 		// North
 		for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field[i].length; j++) {
-				if (hm.size() > 1 && westCnt + northCnt + southCnt + eastCnt > 2) {
+				if (hm.size() > 1 && (westCnt + northCnt + southCnt + eastCnt) > 2) {
 					i = field.length;
 					break;
 				}
+				if (field[i][j] == 'c') {
 
-				if (northCnt < 2) {
-					if (i + 2 < field.length && field[i + 1][j] == 'o' && field[i + 2][j] == 'w') {
-						hm.put("north", new int[] { j, i });
-						northCnt++;
-						continue;
+					if (northCnt < 2) {
+						if (i + 2 < field.length && field[i + 1][j] == 'o' && field[i + 2][j] == 'w') {
+							hm.put("north", new int[] { j, i });
+							northCnt++;
+							continue;
+						}
+					}
+
+					if (southCnt < 2) {
+						if (i - 2 >= 0 && field[i - 1][j] == 'o' && field[i - 2][j] == 'w') {
+							hm.put("south", new int[] { j, i });
+							southCnt++;
+							continue;
+						}
+					}
+
+					if (eastCnt < 2) {
+						if (j + 2 < field[i].length && field[i][j + 1] == 'o' && field[i][j + 2] == 'w') {
+							hm.put("east", new int[] { j, i });
+							eastCnt++;
+							continue;
+						}
+					}
+
+					if (westCnt < 2) {
+						if (j - 2 >= 0 && field[i][j - 1] == 'o' && field[i][j - 2] == 'w') {
+							hm.put("west", new int[] { j, i });
+							westCnt++;
+							continue;
+						}
 					}
 				}
-
-				if (southCnt < 2) {
-					if (i - 2 < 0 && field[i - 1][j] == 'o' && field[i - 2][j] == 'w') {
-						hm.put("south", new int[] { j, i });
-						southCnt++;
-						continue;
-					}
-				}
-
-				if (eastCnt < 2) {
-					if (j + 2 < field.length && field[i][j+1] == 'o' && field[i][j+2] == 'w') {
-						hm.put("east", new int[] { j, i });
-						eastCnt++;
-						continue;
-					}
-				}
-
-				if (westCnt < 2) {
-					if (j - 2 < 0 && field[j - 1][i] == 'o' && field[j - 2][i] == 'w') {
-						hm.put("west", new int[] { j, i });
-						westCnt++;
-						continue;
-					}
-				}
-
 			}
 		}
-		if (eastCnt == 1) {
+		if (northCnt == 1) {
+			rowCol = hm.get("north");
+		} else if (southCnt == 1) {
+			rowCol = hm.get("south");
+		} else if (eastCnt == 1) {
 			rowCol = hm.get("east");
+		} else if (westCnt == 1) {
+			rowCol = hm.get("west");
 		}
 
 		return rowCol;
