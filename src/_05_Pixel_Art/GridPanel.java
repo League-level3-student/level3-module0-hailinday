@@ -3,10 +3,11 @@ package _05_Pixel_Art;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.Serializable;
 
 import javax.swing.JPanel;
 
-public class GridPanel extends JPanel{
+public class GridPanel extends JPanel implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private int windowWidth;
@@ -39,7 +40,7 @@ public class GridPanel extends JPanel{
         // 3. Iterate through the array and initialize each element to a new pixel.
         for (int i = 0; i < pixels.length; i++) {
 			for (int j = 0; j < pixels[i].length; j++) {
-				pixels[i][j] = new Pixel(i, j);
+				pixels[i][j] = new Pixel(i*pixelWidth, j*pixelHeight);
 			}
         }
     }
@@ -63,8 +64,9 @@ public class GridPanel extends JPanel{
     	 for (int i = 0; i < pixels.length; i++) {
  			for (int j = 0; j < pixels[i].length; j++) {
  				g.setColor(pixels[i][j].color);
- 				g.fillRect(i, j, pixelWidth, pixelHeight);
- 				g.drawRect(i, j, pixelWidth, pixelHeight);
+ 				g.fillRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
+ 				g.setColor(color.black);				
+ 				g.drawRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
  				
  			}
          }
