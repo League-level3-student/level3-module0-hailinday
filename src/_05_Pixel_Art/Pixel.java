@@ -1,8 +1,9 @@
 package _05_Pixel_Art;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public class Pixel{
+public class Pixel implements Serializable{
     public int x;
     public int y;
     public Color color;
@@ -12,4 +13,5 @@ public class Pixel{
         this.y = y;
         color = Color.WHITE;
     }
+    
 }

@@ -3,12 +3,22 @@ package _05_Pixel_Art;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javax.swing.JPanel;
 
+import _05_Serialization.MinecraftCreeper;
+
 public class GridPanel extends JPanel implements Serializable{
 
+	private static final String DATA_FILE = "src/_05_Pixel_Art/saved.dat";
+	
     private static final long serialVersionUID = 1L;
     private int windowWidth;
     private int windowHeight;
@@ -71,5 +81,26 @@ public class GridPanel extends JPanel implements Serializable{
  			}
          }
     }
+    private static void save(Pixel data) {
+		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static Pixel load() {
+		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
+			return (Pixel) ois.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			// This can occur if the object we read from the file is not
+			// an instance of any recognized class
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }
