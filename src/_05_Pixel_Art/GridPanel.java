@@ -11,11 +11,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import javax.sound.sampled.EnumControl.Type;
 import javax.swing.JPanel;
 
 import _05_Serialization.MinecraftCreeper;
 
-public class GridPanel extends JPanel implements Serializable{
+public class GridPanel extends JPanel implements Serializable {
 
 	private static final String DATA_FILE = "src/_05_Pixel_Art/saved.dat";
 	
@@ -27,7 +28,7 @@ public class GridPanel extends JPanel implements Serializable{
     private int rows;
     private int cols;
 
-    // 1. Create a 2D array of pixels. Do not initialize it yet.
+    static // 1. Create a 2D array of pixels. Do not initialize it yet.
     Pixel [] [] pixels;
     private Color color;
 
@@ -81,17 +82,19 @@ public class GridPanel extends JPanel implements Serializable{
  			}
          }
     }
-    private static void save(Pixel data) {
-		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(data);
+    public static void save() {
+		System.out.println("Sav");
+    	try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(pixels);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static Pixel load() {
-		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
-			return (Pixel) ois.readObject();
+	public static Pixel[] [] load() {
+		System.out.println("load");
+		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) { 
+			return (Pixel [] []) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

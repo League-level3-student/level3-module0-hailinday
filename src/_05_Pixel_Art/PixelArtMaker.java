@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 public class PixelArtMaker implements MouseListener{
     private JFrame window;
     private GridInputPanel gip;
-    private GridPanel gp;
+    public static GridPanel gp;
     ColorSelectionPanel csp;
 
     public void start() {
@@ -25,7 +25,11 @@ public class PixelArtMaker implements MouseListener{
     }
 
     public void submitGridData(int w, int h, int r, int c) {
-        gp = new GridPanel(w, h, r, c);
+        Pixel [][] pixelArray = GridPanel.load();
+    	gp = new GridPanel(w, h, r, c);
+    	if(pixelArray!=null) {
+    		gp.pixels=pixelArray;
+    	}
         csp = new ColorSelectionPanel();
         window.remove(gip);
         window.add(gp);
@@ -37,6 +41,7 @@ public class PixelArtMaker implements MouseListener{
 
     public static void main(String[] args) {
         new PixelArtMaker().start();
+        
     }
 
     @Override

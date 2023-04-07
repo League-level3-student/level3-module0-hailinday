@@ -141,15 +141,7 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 		if (e.getSource()==saver) {
 			//SAVE FILE HERE SOMEHOW
 			//AND LOAD IT WHEN NEXT RUN
-			try {
-				FileWriter fw = new FileWriter("FILE HERE FOR PIXEL ART SAVE", true);
-				
-				fw.write("SOMEHOW MAKE IT ADD THE PIXEL IMAGE HERE");
-					
-				fw.close();
-			} catch (IOException j) {
-				j.printStackTrace();
-			}
+			PixelArtMaker.gp.save();
 		}
 	}
 }
